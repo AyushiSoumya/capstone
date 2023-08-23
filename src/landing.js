@@ -1,20 +1,31 @@
-import React from 'react';
-import { Grid, Paper, Button, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { Grid, Button, Typography, Popover, List, ListItem, ListItemText } from '@mui/material';
 import cloud from './cloud.PNG';
 import { Link } from 'react-router-dom';
 
 export function LandingPage() {
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'services-popover' : undefined;
+
   const pageStyle = {
     backgroundColor: '#27445C', // Professional blue background color
-    
     minHeight: '100vh', // Full-page height
   };
 
   const navbarStyle = {
     backgroundColor: '#f0f8ff', // Light blue navbar background color
     display: 'flex',
-      justifyContent: 'space-between',
-     
+    justifyContent: 'space-between',
     padding: '10px',
   };
 
@@ -34,15 +45,41 @@ export function LandingPage() {
           <Typography variant="h6">CASEWISE</Typography>
         </div>
         <div>
-          <Button variant="text" color="primary">
+          <Button variant="text" color="primary" onClick={handleClick}>
             Services
-                  </Button>
-                  <Link to='/'>
-                  <Button variant="text" color="primary">
-                      
-            Login
-                      </Button>
-                      </Link>
+          </Button>
+          <Popover
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'center',
+            }}
+          >
+            <List>
+              <ListItem button component={Link} to="/courts" onClick={handleClose}>
+                <ListItemText primary="Court Information" />
+              </ListItem>
+               <ListItem button component={Link} to="/organizations" onClick={handleClose}>
+                <ListItemText primary="Organisation Information" />
+              </ListItem>
+               <ListItem button component={Link} to="/roles" onClick={handleClose}>
+                <ListItemText primary="Roles Information" />
+              </ListItem>
+              {/* Add more menu items here if needed */}
+            </List>
+          </Popover>
+          <Link to='/'>
+            <Button variant="text" color="primary">
+              Login
+            </Button>
+          </Link>
         </div>
       </div>
 
@@ -52,7 +89,7 @@ export function LandingPage() {
         spacing={4}
         justifyContent="center"
         alignItems="center"
-        style={{ minHeight: '80vh', padding: '20px', color:'white' }} // Padding around the content and full-page height
+        style={{ minHeight: '80vh', padding: '20px', color: 'white' }} // Padding around the content and full-page height
       >
         {/* Left Grid */}
         <Grid item xs={12} sm={6} md={6}>
