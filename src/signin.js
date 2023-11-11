@@ -3,21 +3,12 @@ import { Grid, Paper, Typography, TextField, Button, Link } from '@mui/material'
 import logo from './logo.png';
 
 export function Signin() {
-  const logoStyle = {
-    width: '100px',
-    height: '100px',
-    borderRadius: '50%',
-    position: 'absolute',
-    top: '20px',
-    left: '20px',
-  };
+ 
 
   return (
-    <Grid container spacing={4} justifyContent="center" alignItems="center" style={{ height: '100vh' }}>
+    <Grid container spacing={4} justifyContent="center" alignItems="center" style={{ height: '100vh' ,paddingTop: '64px'}}>
           {/* Left Side - Logo and Website Name */}
-          <div style={logoStyle}>
-          <img src={logo} alt="Logo" style={{ width: '100%', height: '100%', borderRadius: '50%' }} />
-        </div>
+         
       <Grid item xs={12} sm={6} md={4} >
         
         <Typography variant="h2" style={{ marginLeft: '130px' }}>
