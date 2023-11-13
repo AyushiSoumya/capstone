@@ -33,19 +33,16 @@ export function LandingPage() {
         spacing={4}
         justifyContent="center"
         alignItems="center"
-        style={{ minHeight: '80vh', padding: '20px', color: 'white' }} // Padding around the content and full-page height
+        style={{ minHeight: '100vh', padding: '20px', color: 'white' }} // Padding around the content and full-page height
       >
         {/* Left Grid */}
         <Grid item xs={12} sm={6} md={6}>
-          <Typography variant="h4" style={{ fontWeight: 'bold', lineHeight: '1.2' }}>
+          <Typography variant="h4" style={{ fontWeight: 'bold', lineHeight: '1.2',fontFamily:'Dancing Script' }}>
             Secure Storage for Legal Management
           </Typography>
           <div>
             <Typography variant="body1">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ac justo eget augue vestibulum auctor.
-              Vivamus vulputate v estibulum eros, vel bibendum metus tristique id. Nulla non bibendum justo, vel rhoncus
-              nibh.
-            </Typography>
+Legal data fortress: where secrets speak securely, tech flows seamlessly, and compliance is second nature. It's not just storage; it's a symphony of security in the legal rhythm. Elevate your data game effortlessly.            </Typography>
           </div>
           <Link to="/services">
           <Button variant="contained" color="primary" style={{ borderRadius: '25px', marginTop: '20px' }}>

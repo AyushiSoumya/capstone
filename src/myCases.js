@@ -1,44 +1,81 @@
-import React from 'react';
-import { Container, Grid, Paper } from '@mui/material';
+// Import necessary dependencies
+import React, { useState } from 'react';
+import { Button, TextField, Typography } from '@mui/material';
+import casesImage from './cases.png'; // Make sure to adjust the path accordingly
 
+// Functional component for the myCases page
 const MyCases = () => {
+  // State to store the entered case ID
+  const [caseId, setCaseId] = useState('');
+
+  // Function to handle the form submission
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Add logic here to handle the submission, e.g., fetching case data by ID
+    console.log(`Fetching data for case ID: ${caseId}`);
+  };
+
+  // Function to handle the "Show All My Cases" button click
+  const handleShowAllCases = () => {
+    // Add logic here to show all cases
+    console.log('Showing all cases');
+  };
+
   return (
-    <Container style={{ paddingTop: '64px', backgroundColor: '#27445C', minHeight: '100vh' ,minWidth:'100vw'}}>
-      <Grid container spacing={2}>
-        {/* First Div */}
-        <Grid item xs={6}>
-          <Paper style={{ height: '75vh', backgroundColor: '#9bc2cf' }}>
-            {/* Content for Case Details */}
-            <div style={{ padding: '20px' }}>
-              <h2>Case Details</h2>
-              {/* Add your case details content here */}
-            </div>
-          </Paper>
-        </Grid>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        position: 'relative',
+      }}
+    >
+      {/* Transparent image covering the entire page */}
+      <img
+        src={casesImage}
+        alt="Cases"
+        style={{
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          opacity: 0.6, // Adjust the transparency as needed
+        }}
+      />
 
-        {/* Second Div */}
-        <Grid item xs={6}>
-          <Paper style={{ height: '75vh', backgroundColor: '#9bc2cf' }}>
-            {/* Content for Organization Details */}
-            <div style={{ padding: '20px' }}>
-              <h2>Organization Details</h2>
-              {/* Add your organization details content here */}
-            </div>
-          </Paper>
-        </Grid>
+      {/* Content in the center */}
+      <div style={{ width: '50%', textAlign: 'center', zIndex: 1 }}>
+        <Typography variant="h4" fontFamily="Dancing Script" style={{ marginBottom: '20px' }}>
+          Search the Case by ID
+        </Typography>
 
-        {/* Third Div */}
-        <Grid item xs={12}>
-          <Paper style={{ height: '25vh', backgroundColor: '#9bc2cf' }}>
-            {/* Content for Case Documents */}
-            <div style={{ padding: '20px', color: '#27445C' }}>
-              <h2>Case Documents</h2>
-              {/* Add your case documents content here */}
-            </div>
-          </Paper>
-        </Grid>
-      </Grid>
-    </Container>
+        {/* Search bar */}
+        <form onSubmit={handleSubmit} style={{ marginBottom: '20px' }}>
+          <TextField
+            label="Enter Case ID"
+            variant="outlined"
+            fullWidth
+            value={caseId}
+            onChange={(e) => setCaseId(e.target.value)}
+            style={{backgroundColor:'white', borderRadius: '15px'}}
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            style={{ margin: '25px' }}
+
+          >
+            Submit
+          </Button>
+        </form>
+
+        {/* "Show All My Cases" button */}
+        <Button variant="contained" color="secondary" onClick={handleShowAllCases}>
+          Show All My Cases
+        </Button>
+      </div>
+    </div>
   );
 };
 

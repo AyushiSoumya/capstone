@@ -28,7 +28,7 @@ export function Signin() {
           <Typography variant="h5" gutterBottom>
             Sign In
           </Typography>
-          <form style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          {/* <form style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}> */}
             <TextField
               label="Username"
               fullWidth
@@ -50,13 +50,16 @@ export function Signin() {
                 style: { backgroundColor: '#f0f8ff', border: 'none', marginBottom: '16px' } // Light blue background and no border
               }}
             />
+
+            <Link href="landing">
             <Button variant="contained" color="primary" fullWidth type="submit" style={{ marginBottom: '16px' }}>
               Sign In
             </Button>
-            <Link href="#" variant="body2">
+</Link>
+            <Link  variant="body2">
               Sign in with Google
             </Link>
-          </form>
+          {/* </form> */}
         </Paper>
       </Grid>
     </Grid>

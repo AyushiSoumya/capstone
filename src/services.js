@@ -56,7 +56,7 @@ function ServicesPage() {
 
   return (
     <div style={rootStyle}>
-      <Typography variant="h4" gutterBottom style={{ color: 'white', padding: '30px' }}>
+      <Typography variant="h4" gutterBottom style={{ color: 'white', padding: '50px',fontFamily:"Dancing Script", fontSize: '80px' }}>
         Select your service
       </Typography>
       <Grid container spacing={3} alignItems="stretch" justify="center">
@@ -64,10 +64,11 @@ function ServicesPage() {
           <Link to='/organizations' style={linkStyle}>
             <Paper elevation={3} style={cardStyle}>
               <div style={circleStyle}>1</div>
-              <Typography variant="h6" gutterBottom>
+              <Typography variant="h6" gutterBottom style={{ padding: '10px' ,fontFamily:'cursive'}}>
                 Choose Organization
               </Typography>
-              <Typography>
+              <Typography
+              style={{ padding: '15px'}}>
                 Select the organization best suited towards your needs and requirements based on the city of the organization.
               </Typography>
             </Paper>
@@ -77,23 +78,23 @@ function ServicesPage() {
           <Link to='/myCases' style={linkStyle}>
             <Paper elevation={3} style={cardStyle}>
               <div style={circleStyle}>2</div>
-              <Typography variant="h6" gutterBottom>
+              <Typography variant="h6" gutterBottom style={{ padding: '10px' ,fontFamily:'cursive'}}>
                 View Case Documents
               </Typography>
-              <Typography>
+              <Typography style={{ padding: '20px'}}>
                 View the case documents and case details pertaining to your case.
               </Typography>
             </Paper>
           </Link>
         </Grid>
         <Grid item xs={12} sm={4}>
-          <Link to='/submit-case-docs' style={linkStyle}>
+          <Link to='/caseForm' style={linkStyle}>
             <Paper elevation={3} style={cardStyle}>
               <div style={circleStyle}>3</div>
-              <Typography variant="h6" gutterBottom>
+              <Typography variant="h6" gutterBottom style={{ padding: '10px' ,fontFamily:'cursive'}}>
                 Submit Case Documentation
               </Typography>
-              <Typography>
+              <Typography style={{ padding: '20px'}}>
                 Case-wise document details submission and uploading.
               </Typography>
             </Paper>

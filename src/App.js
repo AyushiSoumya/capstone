@@ -8,8 +8,11 @@ import RolesPage from './roles';
 import AboutUs from './about';
 import Navbar from './navbar';
 import ServicesPage from './services';
+import MyCasesId from './myCasesId';
 import MyCases from './myCases';
 import Organizations from './organizations';
+import CaseForm from './caseForm';
+import ContactUs from './contact';
 
 function App() {
   return (
@@ -24,8 +27,11 @@ function App() {
           <Route path="/roles" element={<RolesPage />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/services" element={<ServicesPage />} />
+          <Route path="/myCasesId" element={<MyCasesId />} />
+          <Route path="/organizations" element={<Organizations />} />
+          <Route path="/caseForm" element={<CaseForm />} />
+          <Route path="/contact" element={<ContactUs />} />
           <Route path="/myCases" element={<MyCases />} />
-          <Route path="/organizations" element={<Organizations/>}/>
         </Routes>
       </Router>
     </div>
