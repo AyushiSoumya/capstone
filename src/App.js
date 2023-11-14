@@ -13,6 +13,7 @@ import MyCases from './myCases';
 import Organizations from './organizations';
 import CaseForm from './caseForm';
 import ContactUs from './contact';
+import OrgCity from './orgCity';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/caseForm" element={<CaseForm />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/myCases" element={<MyCases />} />
+          <Route path="/orgCity" element={<OrgCity />} />
         </Routes>
       </Router>
     </div>

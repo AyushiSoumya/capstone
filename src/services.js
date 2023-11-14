@@ -60,39 +60,26 @@ function ServicesPage() {
         Select your service
       </Typography>
       <Grid container spacing={3} alignItems="stretch" justify="center">
-        <Grid item xs={12} sm={4}>
-          <Link to='/organizations' style={linkStyle}>
+        
+        <Grid item xs={12} sm={6}>
+          <Link to='/myCases' style={linkStyle}>
             <Paper elevation={3} style={cardStyle}>
               <div style={circleStyle}>1</div>
               <Typography variant="h6" gutterBottom style={{ padding: '10px' ,fontFamily:'cursive'}}>
-                Choose Organization
+                View Case Details
               </Typography>
-              <Typography
-              style={{ padding: '15px'}}>
-                Select the organization best suited towards your needs and requirements based on the city of the organization.
+              <Typography style={{ padding: '20px'}}>
+                View the case details pertaining to your case.
               </Typography>
             </Paper>
           </Link>
         </Grid>
-        <Grid item xs={12} sm={4}>
-          <Link to='/myCases' style={linkStyle}>
+        <Grid item xs={12} sm={6}>
+          <Link to='/caseForm' style={linkStyle}>
             <Paper elevation={3} style={cardStyle}>
               <div style={circleStyle}>2</div>
               <Typography variant="h6" gutterBottom style={{ padding: '10px' ,fontFamily:'cursive'}}>
-                View Case Documents
-              </Typography>
-              <Typography style={{ padding: '20px'}}>
-                View the case documents and case details pertaining to your case.
-              </Typography>
-            </Paper>
-          </Link>
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <Link to='/caseForm' style={linkStyle}>
-            <Paper elevation={3} style={cardStyle}>
-              <div style={circleStyle}>3</div>
-              <Typography variant="h6" gutterBottom style={{ padding: '10px' ,fontFamily:'cursive'}}>
-                Submit Case Documentation
+                Submit Case Details
               </Typography>
               <Typography style={{ padding: '20px'}}>
                 Case-wise document details submission and uploading.

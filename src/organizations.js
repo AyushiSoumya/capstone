@@ -1,59 +1,76 @@
-// organizations.js
+// Organizations.js
 
-import React from 'react';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Typography from '@mui/material/Typography';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import organizationsImage from './organizations.png';
 
 function Organizations() {
-  const searchBarStyle = {
-    backgroundColor: '#27445C',
-    padding: '1.5rem',
-    borderRadius: '10px',
-    textAlign: 'center',
-    height: '100%',
-  };
+  const [organizations, setOrganizations] = useState([]);
 
-  const imageStyle = {
-    width: '100%',  // Make the image width 100%
-    height: '100vh',  // Set the height to 100% of the viewport height
-    borderRadius: '30%',
-    margin: '0 auto',
-    display: 'block',
-  };
-
-    const searchStyle = {
-    width: '80%',
-    padding: '15px',
-    margin: '15px 0', // Add space around the input
-    borderRadius: '20px', // Rounded edges
-    border: 'none',
-    backgroundColor: '#ADD8E6', // Input background color
-    color: '#27445C', // Input text color
-    fontSize: '16px', // Input text size
-  };
   const rootStyle = {
     backgroundColor: '#27445C',
     padding: '64px',
     minHeight: '100vh',
     display: 'flex',
-    flexDirection: 'row', // Display children components in a row
-    alignItems: 'center', // Center items vertically
-    justifyContent: 'center', // Center items horizontally
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   };
+
+  const cardStyle = {
+    backgroundColor: '#ADD8E6',
+    borderRadius: '10px',
+    padding: '20px',
+    // margin: '20px',
+    width: '40vw',
+  };
+
+  const imageStyle = {
+    width: '100%',
+    height: '100vh',
+    borderRadius: '30%',
+    margin: '0 auto',
+    display: 'block',
+  };
+
+  useEffect(() => {
+    // Fetch organization data when the component mounts
+    axios.get('http://localhost:8080/v1/organizations') // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint
+      .then(response => {
+        setOrganizations(response.data.content);
+      })
+      .catch(error => {
+        console.error('Error fetching organization data:', error);
+      });
+  }, []);
 
   return (
     <div style={rootStyle}>
-      <div style={{ width: '50%', paddingRight: '20px' }}>
-        
-          <Typography variant="h5" gutterBottom style={{ color: '#ADD8E6' ,padding:'30px'}}>
-            Browse Organizations within the City
-          </Typography>
-          {/* Add your search bar component here */}
-          <input type="text" placeholder="Search organizations..." style={searchStyle} />
-          {/* Add other search-related components as needed */}
-        
+      <div style={{ width: '50%', paddingRight: '0px' }}>
+        <Typography variant="h5" gutterBottom style={{ color: '#ADD8E6', padding: '30px' }}>
+          MY LEGAL FIRM
+        </Typography>
+
+        {/* Display all organizations */}
+        {organizations.map((org) => (
+          <Card key={org.organizationId} style={cardStyle}>
+            <CardContent>
+              <Typography variant="h6">{org.organizationName}</Typography>
+              <p>{org.organizationDescription}</p>
+              <p>Email: {org.organizationEmail}</p>
+              <p>Phone: {org.organizationPhone}</p>
+              <p>Address: {org.organizationStreet1}, {org.organizationStreet2}, {org.organizationStreetZipcode}</p>
+              <p>City: {org.organizationCityName}</p>
+              <p>District: {org.organizationDistrictName}</p>
+              <p>State: {org.organizationStateName}</p>
+              <p>Country: {org.organizationCountryName}</p>
+              {/* Display other organization details as needed */}
+            </CardContent>
+          </Card>
+        ))}
       </div>
       <div style={{ width: '50%' }}>
         <img src={organizationsImage} alt="Organizations" style={imageStyle} />

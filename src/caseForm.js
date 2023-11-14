@@ -7,7 +7,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 const StyledContainer = styled(Container)({
-  paddingTop: '150px',
+  paddingTop: '80px',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -31,13 +31,13 @@ const StyledForm = styled('form')(({ theme }) => ({
 const StyledTextField = styled(TextField)({
   '& .MuiOutlinedInput-root': {
     '& fieldset': {
-      borderColor: 'white', // Border color
+      //borderColor: 'white', // Border color
     },
     '&:hover fieldset': {
-      borderColor: 'white', // Border color on hover
+      //borderColor: 'white', // Border color on hover
     },
     '&.Mui-focused fieldset': {
-      borderColor: 'white', // Border color when focused
+      //borderColor: 'white', // Border color when focused
     },
   },
   '& .MuiInputBase-input': {
@@ -49,9 +49,11 @@ const StyledTextField = styled(TextField)({
 });
 
 const CaseForm = () => {
-  const [caseName, setCaseName] = useState('');
-  const [lawyerName, setLawyerName] = useState('');
-  const [caseId, setCaseId] = useState('');
+  const [legalCaseTitle, setLegalCaseTitle] = useState('');
+  const [legalCaseDescription, setLegalCaseDescription] = useState('');
+  const [legalCaseId, setLegalCaseId] = useState('');
+  const [legalCaseStatus, setLegalCaseStatus] = useState('');
+
   const [city, setCity] = useState('');
   const [organizationId, setOrganizationId] = useState('');
   const [organizationName, setOrganizationName] = useState('');
@@ -64,7 +66,7 @@ const CaseForm = () => {
   };
 
   const handleEncrypt = () => {
-    if (!file || !caseName || !lawyerName || !caseId|| !organizationName || !organizationId || !city) {
+    if (!file || !legalCaseTitle || !legalCaseDescription || !legalCaseId|| !legalCaseStatus|| !organizationName || !organizationId || !city) {
       alert('Please fill in all details and upload a file.');
       return;
     }
@@ -96,26 +98,37 @@ const CaseForm = () => {
         </Typography>
 
         <div>Case Details</div>
-        <StyledTextField
-          label="Case Name"
-          value={caseName}
-          onChange={(e) => setCaseName(e.target.value)}
-          variant="outlined"
-          margin="normal"
-          fullWidth
-        />
-        <StyledTextField
-          label="Lawyer Name"
-          value={lawyerName}
-          onChange={(e) => setLawyerName(e.target.value)}
-          variant="outlined"
-          margin="normal"
-          fullWidth
-        />
+        
+        
         <StyledTextField
           label="Case ID"
-          value={caseId}
-          onChange={(e) => setCaseId(e.target.value)}
+          value={legalCaseId}
+          onChange={(e) => setLegalCaseId(e.target.value)}
+          variant="outlined"
+          margin="normal"
+          fullWidth
+        />
+        <StyledTextField
+          label="Case Title"
+          value={legalCaseTitle}
+          onChange={(e) => setLegalCaseTitle(e.target.value)}
+          variant="outlined"
+          margin="normal"
+          fullWidth
+        />
+        <StyledTextField
+          label="Case Status"
+          value={legalCaseStatus}
+          onChange={(e) => setLegalCaseStatus(e.target.value)}
+          variant="outlined"
+          margin="normal"
+          fullWidth
+        />
+
+        <StyledTextField
+          label="Case Description"
+          value={legalCaseDescription}
+          onChange={(e) => setLegalCaseDescription(e.target.value)}
           variant="outlined"
           margin="normal"
           fullWidth

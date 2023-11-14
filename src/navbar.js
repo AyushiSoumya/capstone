@@ -1,6 +1,7 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, Button, Container } from '@mui/material';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { IoMdContact } from "react-icons/io";
 const navbarStyle = {
   backgroundColor: '#ADD8E6',
   display: 'flex',
@@ -17,7 +18,10 @@ const Navbar = () => {
          <div>
                  <h3> CASEWISE</h3>
                   </div>
-              <div>
+        <div>
+          <Link to="/organizations">
+                      <Button >My Legal Firm</Button>
+                  </Link>
                   <Link to="/services">
                       <Button >Services</Button>
                   </Link>
@@ -30,7 +34,11 @@ const Navbar = () => {
           </Link>
                   <Link to="/">
                       
-                  <Button >Login</Button>
+            <Button >
+            <div style={{height:'30px', width:'30px'}}>
+                <IoMdContact size="30px" />
+                </div>
+            </Button>
           </Link>
           
                   

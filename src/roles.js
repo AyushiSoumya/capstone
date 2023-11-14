@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Grid, Card, CardContent, Typography } from '@mui/material';
+import { Container, Typography, Grid, Card, CardContent, Link } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 
 function RolesPage() {
   const [roles, setRoles] = useState([]);
@@ -18,49 +19,46 @@ function RolesPage() {
   }, []);
 
   const pageStyle = {
-      backgroundColor: '#27445C',
-    color: 'white', // White text color
-      
-     // Professional blue background color
-    minHeight: '100vh', // Full-page height
+    backgroundColor: '#27445C',
+    color: 'white',
+    minHeight: '100vh',
+    paddingTop: '100px',
   };
 
-  const navbarStyle = {
-    backgroundColor: '#f0f8ff', // Light blue navbar background color
+  const headingStyle = {
+    marginBottom: '20px',
+    fontFamily: 'Dancing Script',
+  };
+
+  const circleStyle = {
+    backgroundColor: '#f0f8ff', // Light blue background color for circles
+    borderRadius: '50%',
     display: 'flex',
-    justifyContent: 'space-between',
-    padding: '10px',
-  };
-
-  const cardStyle = {
-    backgroundColor: 'navy', // Navy blue background color for cards
-    color: 'white', // White text color
-  };
-
-  const cardContentStyle = {
-    backgroundColor: '#f0f8ff', // Very light blue background color for card content
-    color: 'navy', // Navy text color
-    minHeight: '120px', // Adjust the minimum height as needed
+    justifyContent: 'center',
+    alignItems: 'center',
+    textDecoration: 'none',
+    color: '#27445C', // Dark blue text color
+    width: '250px', // Adjust as needed
+    height: '200px', // Adjust as needed
+    margin: '10px',
   };
 
   return (
     <div style={pageStyle}>
-      
       <Container maxWidth="lg">
-        <Typography variant="h4" component="h1" align="center" gutterBottom>
-          Roles
+        <Typography variant="h4" component="h1" align="center" gutterBottom style={headingStyle}>
+          Who are you?
         </Typography>
         <Grid container spacing={2}>
           {roles.map((role) => (
-            <Grid item xs={12} sm={6} md={4} key={role.roleId}>
-              <Card style={cardStyle}>
-                <CardContent style={cardContentStyle}>
-                  <Typography variant="h6" component="div">
-                    {role.roleName}
-                  </Typography>
-                  <Typography color="textSecondary">{role.roleDescription}</Typography>
-                </CardContent>
-              </Card>
+            <Grid item key={role.roleId}>
+              <Link
+                component={RouterLink}
+                to={`/landing`}
+                style={circleStyle}
+              >
+                <Typography variant="h6">{role.roleName}</Typography>
+              </Link>
             </Grid>
           ))}
         </Grid>
