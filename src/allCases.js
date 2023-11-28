@@ -1,87 +1,96 @@
-import React, { useState } from 'react';
-import { Paper, Table, TableContainer, TableHead, TableRow, TableCell, TableBody, Typography, Button } from '@mui/material';
-import CaseForm from './caseForm';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { styled } from '@mui/system';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
+const StyledTableContainer = styled(TableContainer)({
+  marginTop: '50px',
+});
+
+const DeleteButton = styled(Button)({
+  backgroundColor: '#FF3D00',
+  color: '#FFFFFF',
+});
+
+const ArchivedCasesButton = styled(Button)({
+  marginLeft: '1200px',
+  marginRight:'50px',// Add some spacing to the left
+  backgroundColor: '#4CAF50', // Green color for Archived Cases button
+  color: '#FFFFFF',
+});
 
 const AllCases = () => {
-  const [cases, setCases] = useState([]);
+  const [allCases, setAllCases] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Function to handle case deletion
-  const handleDelete = (caseId) => {
-    // Filter out the case with the given ID
-    const updatedCases = cases.filter((caseItem) => caseItem.legalCaseId !== caseId);
-    setCases(updatedCases);
+  useEffect(() => {
+    const fetchAllCases = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/v1/legalcases');
+        setAllCases(response.data.content || []);
+      } catch (error) {
+        console.error('Error fetching all cases:', error);
+        setError('An error occurred while fetching cases.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAllCases();
+  }, []);
+
+  const handleDelete = async (caseId) => {
+    try {
+      await axios.delete(`http://localhost:8080/v1/legalcases/${caseId}`);
+      setAllCases((prevCases) => prevCases.filter((caseItem) => caseItem.legalCaseId !== caseId));
+    } catch (error) {
+      console.error('Error deleting legal case:', error);
+    }
   };
 
-  // Function to handle adding a new case
-  const handleAddCase = (newCase) => {
-    // Update the cases state with the new case
-    setCases([...cases, newCase]);
-  };
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
-  // Function to handle file download
-  const handleDownload = (encryptedFile) => {
-  // Create a Blob from the encrypted file content
-  const blob = new Blob([encryptedFile], { type: 'text/plain' });
-
-  // Create a link element and trigger a download
-  const link = document.createElement('a');
-  link.href = window.URL.createObjectURL(blob);
-  link.download = 'encrypted_file.txt';
-  link.click();
-};
-
+  if (error) {
+    return <p>{error}</p>;
+  }
 
   return (
-    <div style={{ padding: '64px', backgroundColor: '#27445C', minHeight: '100vh', minWidth: '100vw' }}>
-      {/* Pass the handleAddCase function to the CaseForm component */}
-      <CaseForm onAddCase={handleAddCase} />
-
-      <Typography variant="h4" style={{ color: '#ADD8E6', marginBottom: '20px' }}>
-        All Cases
-      </Typography>
-
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Title</TableCell>
-              <TableCell>Description</TableCell>
-              <TableCell>Status</TableCell>
-              <TableCell>File</TableCell> {/* New column for encrypted file */}
-              <TableCell>Action</TableCell>
+    <StyledTableContainer component={Paper}>
+      <div style={{ fontFamily: 'Dancing Script', paddingTop: '50px', fontSize: '50px' }}>All Cases</div>
+      <ArchivedCasesButton component={Link} to="/myCases">
+        Archived Cases
+      </ArchivedCasesButton>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Case ID</TableCell>
+            <TableCell>Title</TableCell>
+            <TableCell>Description</TableCell>
+            <TableCell>Status</TableCell>
+            <TableCell>Delete</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {allCases.map((caseItem) => (
+            <TableRow key={caseItem.legalCaseId}>
+              <TableCell>{caseItem.legalCaseId}</TableCell>
+              <TableCell>{caseItem.legalCaseTitle}</TableCell>
+              <TableCell>{caseItem.legalCaseDescription}</TableCell>
+              <TableCell>{caseItem.legalCaseStatus}</TableCell>
+              <TableCell>
+                <DeleteButton variant="contained" onClick={() => handleDelete(caseItem.legalCaseId)}>
+                  Delete
+                </DeleteButton>
+              </TableCell>
             </TableRow>
-          </TableHead>
-          <TableBody>
-            {cases.map((caseItem) => (
-              <TableRow key={caseItem.legalCaseId}>
-                <TableCell>{caseItem.legalCaseTitle}</TableCell>
-                <TableCell>{caseItem.legalCaseDescription}</TableCell>
-                <TableCell>{caseItem.legalCaseStatus}</TableCell>
-                <TableCell>
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    onClick={() => handleDownload(caseItem.encryptedFile)}
-                  >
-                    Download
-                  </Button>
-                </TableCell>
-                <TableCell>
-                  <Button
-                    variant="outlined"
-                    color="secondary"
-                    onClick={() => handleDelete(caseItem.legalCaseId)}
-                  >
-                    Delete
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </div>
+          ))}
+        </TableBody>
+      </Table>
+    </StyledTableContainer>
   );
 };
 

@@ -16,6 +16,7 @@ import ContactUs from './contact';
 import OrgCity from './orgCity';
 import AllCases from './allCases';
 import LegalTech from './legalTech';
+import Calendar from './calendar';
 
 function App() {
   const isSignInOrRegister = window.location.pathname === '/' || window.location.pathname === '/register';
@@ -40,6 +41,7 @@ function App() {
           <Route path="/orgCity" element={<OrgCity />} />
           <Route path="/allCases" element={<AllCases />} />
           <Route path="/legalTech" element={<LegalTech />} />
+          <Route path="/calendar" element={<Calendar />} />
         </Routes>
       </Router>
     </div>
